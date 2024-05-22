@@ -1,0 +1,7 @@
+# Dotfiles
+
+.config
+
+├── fish
+
+└── scripts
