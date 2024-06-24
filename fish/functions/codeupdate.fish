@@ -39,6 +39,29 @@ function codeupdate
         			rm $output
         			rm -rf $extract_dir
         			echo "Archive removed."
+        			
+        			# create symbolic link
+        			if not test -e /usr/bin/code	
+        				echo "link to /usr/bin/code for easy access"
+        				sudo ln -s $target_dir/bin/code /usr/bin/code
+        			end
+        			
+        			# create desktop entry
+        			if not test -e /usr/share/applications/code.desktop
+        				echo "creating desktop entry"
+        				echo "
+[Desktop Entry]
+Name=Visual Studio Code
+Comment=Code Editing. Redefined.
+GenericName=Text Editor
+Exec=/opt/VSCode-linux-x64/bin/code
+Icon=/opt/VSCode-linux-x64/resources/app/resources/linux/code.png
+Terminal=false
+Type=Application
+Categories=TextEditor;Development;IDE;
+					" > ~/.local/share/applications/code.desktop
+				end
+        				
         		else
         			echo "Failed to overwrite $target_dir."
         		end
